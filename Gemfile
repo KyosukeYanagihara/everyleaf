@@ -20,9 +20,9 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'faker'
   gem 'launchy'
-  # gem 'pry-rails'
-  # gem 'better_errors'
-  # gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
