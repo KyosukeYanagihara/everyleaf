@@ -10,7 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in "Name", with: "test_name1"
         fill_in "Description", with: "text_description2"
-        click_on "Create Task"
+        click_on "登録する"
         expect(page).to have_content 'test_name1'
       end
     end
@@ -20,6 +20,14 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成済みのタスク一覧が表示される' do
         visit tasks_path
         expect(page).to have_content 'test_name1'
+      end
+    end
+    context 'タスクが作成日時の降順に並んでいる場合' do
+      it '新しいタスクが一番上に表示される' do
+        visit tasks_path
+        task_list = all('tbody tr')
+        expect(task_list[0]).to have_content 'test_name2'
+        expect(task_list[1]).to have_content 'test_name1'
       end
     end
   end
