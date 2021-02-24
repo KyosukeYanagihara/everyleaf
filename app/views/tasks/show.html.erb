@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>タスク名:</strong>
   <%= @task.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>詳しい内容:</strong>
   <%= @task.description %>
+</p>
+
+<p>
+  <strong>終了期限:</strong>
+  <%= @task.deadline.strftime("%Y-%m-%d") %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

@@ -9,7 +9,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成したタスクが表示される' do
         visit new_task_path
         fill_in "Name", with: "test_name1"
-        fill_in "Description", with: "text_description2"
+        fill_in "Description", with: "text_description1"
         click_on "登録する"
         expect(page).to have_content 'test_name1'
       end
@@ -28,6 +28,15 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('tbody tr')
         expect(task_list[0]).to have_content 'test_name2'
         expect(task_list[1]).to have_content 'test_name1'
+      end
+    end
+    context 'タスクが終了期限の昇順に並んでいる場合' do
+      it '終了期限が近い物が一番上に表示される' do
+        visit tasks_path
+        click_on '終了期限でソートする'
+        task_list = all('tbody tr')
+        expect(task_list[0]).to have_content 'test_name1'
+        expect(task_list[1]).to have_content 'test_name2'
       end
     end
   end
