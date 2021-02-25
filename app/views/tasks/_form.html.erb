@@ -31,6 +31,11 @@
     <%= f.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
   </div>
 
+  <div class="field">
+    <%= f.label :priority %>
+    <%= f.select :priority, [["低", "低"], ["中", "中"], ["高", "高"]], include_blank: "選択して下さい" %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

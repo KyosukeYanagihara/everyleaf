@@ -58,6 +58,14 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[1]).to have_content 'test_name1'
       end
     end
+    context 'タスクが優先度の降順に並んでいる場合' do
+      it '優先度の高いタスクが一番上に表示される' do
+        visit tasks_path
+        task_list = all('tbody tr')
+        expect(task_list[0]).to have_content 'test_name2'
+        expect(task_list[1]).to have_content 'test_name1'
+      end
+    end
     context 'タスクが終了期限の昇順に並んでいる場合' do
       it '終了期限が近い物が一番上に表示される' do
         visit tasks_path
