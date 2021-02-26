@@ -1,19 +1,20 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  PER = 9
 
   def index
     if params[:name].present? && params[:status].present?
-      @tasks = Task.search_name(params[:name]).search_status(params[:status])
+      @tasks = Task.search_name(params[:name]).search_status(params[:status]).page(params[:page]).per(PER)
     elsif params[:name].present?
-      @tasks = Task.search_name(params[:name])
+      @tasks = Task.search_name(params[:name]).page(params[:page]).per(PER)
     elsif params[:status].present?
-      @tasks = Task.search_status(params[:status])
+      @tasks = Task.search_status(params[:status]).page(params[:page]).per(PER)
     elsif params[:sort_deadline]
-      @tasks = Task.sort_deadline
+      @tasks = Task.sort_deadline.page(params[:page]).per(PER)
     elsif params[:sort_priority]
-      @tasks = Task.sort_priority
+      @tasks = Task.sort_priority.page(params[:page]).per(PER)
     else
-      @tasks = Task.sort_created
+      @tasks = Task.sort_created.page(params[:page]).per(PER)
     end
 
   end

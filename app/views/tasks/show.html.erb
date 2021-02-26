@@ -25,5 +25,10 @@
   <%= @task.deadline.strftime("%Y-%m-%d") %>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<p>
+  <strong>登録日:</strong>
+  <%= @task.created_at.strftime("%Y-%m-%d") %>
+</p>
+
+<%= link_to '編集', edit_task_path(@task) %> |
+<%= link_to '戻る', tasks_path %>
