@@ -24,7 +24,7 @@
         <th width="620"><%= t('activerecord.attributes.task.description') %></th>
         <th><%= t('activerecord.attributes.task.status') %></th>
         <th><%= link_to "#{t('activerecord.attributes.task.priority')}🔽", tasks_path(sort_priority: "true") %></th>
-        <th><%= link_to "#{t('activerecord.attributes.task.deadline')}🔽", tasks_path(sort_deadline: "true") %></th>
+        <th><%= link_to "#{t('activerecord.attributes.task.deadline')}🔼", tasks_path(sort_deadline: "true") %></th>
         <th><%= link_to "#{t('activerecord.attributes.task.created_at')}🔽", tasks_path %></th>
         <th colspan="3"></th>
       </tr>

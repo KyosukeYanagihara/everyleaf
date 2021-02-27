@@ -3,6 +3,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   before do
     FactoryBot.create(:task)
     FactoryBot.create(:second_task)
+    FactoryBot.create(:third_task)
   end
   describe '検索機能' do
     before do
@@ -13,13 +14,17 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in "タスク名", with: "name1"
         click_on "検索"
         expect(page).to have_content 'test_name1'
+        expect(page).to_not have_content 'test_name2'
+        expect(page).to_not have_content 'test_name3'
       end
     end
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
         select '未着手', from: 'status'
         click_on "検索"
-        expect(page).to have_content '未着手'
+        expect(page).to_not have_content 'test_name2'
+        expect(page).to have_content 'test_name1'
+        expect(page).to have_content 'test_name3'
       end
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
@@ -37,12 +42,16 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '作成したタスクが表示される' do
         visit new_task_path
         fill_in "タスク名", with: "test_name1"
-        fill_in "詳しい内容", with: "text_description1"
-        fill_in '終了期限', with: Time.current
+        fill_in "詳しい内容", with: "test_description1"
+        fill_in '終了期限', with: Time.current.since(20.day)
         select '未着手', from: 'ステータス'
         select '低', from: '優先度'
         click_on "登録する"
-        expect(page).to have_content '作成しました'
+        expect(page).to have_content 'test_name1'
+        expect(page).to have_content 'test_description1'
+        expect(page).to have_content Time.current.since(20.day).strftime("%Y-%m-%d")
+        expect(page).to have_content '未着手'
+        expect(page).to have_content '低'
       end
     end
   end
@@ -57,26 +66,31 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '新しいタスクが一番上に表示される' do
         visit tasks_path
         task_list = all('tbody tr')
-        expect(task_list[0]).to have_content 'test_name2'
-        expect(task_list[1]).to have_content 'test_name1'
+        expect(task_list[0]).to have_content 'test_name'
+        expect(task_list[1]).to have_content 'test_name2'
+        expect(task_list[2]).to have_content 'test_name1'
       end
     end
     context 'タスクが優先度の降順に並んでいる場合' do
       it '優先度の高いタスクが一番上に表示される' do
         visit tasks_path
+        click_on '優先度🔽'
+        sleep(1)
         task_list = all('tbody tr')
         expect(task_list[0]).to have_content 'test_name2'
-        expect(task_list[1]).to have_content 'test_name1'
+        expect(task_list[1]).to have_content 'test_name3'
+        expect(task_list[2]).to have_content 'test_name1'
       end
     end
     context 'タスクが終了期限の昇順に並んでいる場合' do
       it '終了期限が近い物が一番上に表示される' do
         visit tasks_path
-        click_on '終了期限🔽'
+        click_on '終了期限🔼'
         sleep(1)
         task_list = all('tbody tr')
-        expect(task_list[0]).to have_content 'test_name1'
+        expect(task_list[0]).to have_content 'test_name3'
         expect(task_list[1]).to have_content 'test_name2'
+        expect(task_list[2]).to have_content 'test_name1'
       end
     end
   end
