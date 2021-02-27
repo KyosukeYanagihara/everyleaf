@@ -20,12 +20,12 @@
   <table>
     <thead>
       <tr>
-        <th>タスク名</th>
-        <th width="620">詳しい内容</th>
-        <th>ステータス</th>
-        <th><%= link_to "優先度🔽", tasks_path(sort_priority: "true") %></th>
-        <th><%= link_to "終了期限🔽", tasks_path(sort_deadline: "true") %></th>
-        <th><%= link_to "登録日🔽", tasks_path %></th>
+        <th><%= t('activerecord.attributes.task.name') %></th>
+        <th width="620"><%= t('activerecord.attributes.task.description') %></th>
+        <th><%= t('activerecord.attributes.task.status') %></th>
+        <th><%= link_to "#{t('activerecord.attributes.task.priority')}🔽", tasks_path(sort_priority: "true") %></th>
+        <th><%= link_to "#{t('activerecord.attributes.task.deadline')}🔽", tasks_path(sort_deadline: "true") %></th>
+        <th><%= link_to "#{t('activerecord.attributes.task.created_at')}🔽", tasks_path %></th>
         <th colspan="3"></th>
       </tr>
     </thead>

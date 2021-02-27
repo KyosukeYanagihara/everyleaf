@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        name: タスク名
+        description: 詳しい内容
+        deadline: 終了期限
+        status: ステータス
+        priority: 優先度
+        created_at: 登録日
