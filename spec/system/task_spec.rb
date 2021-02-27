@@ -38,8 +38,11 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in "タスク名", with: "test_name1"
         fill_in "詳しい内容", with: "text_description1"
+        fill_in '終了期限', with: Time.current
+        select '未着手', from: 'ステータス'
+        select '低', from: '優先度'
         click_on "登録する"
-        expect(page).to have_content 'test_name1'
+        expect(page).to have_content '作成しました'
       end
     end
   end
@@ -70,6 +73,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限が近い物が一番上に表示される' do
         visit tasks_path
         click_on '終了期限🔽'
+        sleep(1)
         task_list = all('tbody tr')
         expect(task_list[0]).to have_content 'test_name1'
         expect(task_list[1]).to have_content 'test_name2'
