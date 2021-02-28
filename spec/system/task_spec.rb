@@ -22,9 +22,10 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "ステータスに完全一致するタスクが絞り込まれる" do
         select '未着手', from: 'status'
         click_on "検索"
-        expect(page).to_not have_content 'test_name2'
-        expect(page).to have_content 'test_name1'
-        expect(page).to have_content 'test_name3'
+        tds = all('tbody tr')[0].all('td')
+        expect(tds[2]).to_not have_content '完了'
+        expect(tds[2]).to_not have_content '着手中'
+        expect(tds[2]).to have_content '未着手'
       end
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do

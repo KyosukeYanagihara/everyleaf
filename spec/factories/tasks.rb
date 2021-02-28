@@ -17,7 +17,7 @@ FactoryBot.define do
     name { 'test_name3' }
     description { 'test_description3' }
     deadline { Time.current }
-    status { '未着手' }
+    status { '完了' }
     priority { '中' }
   end
 end
