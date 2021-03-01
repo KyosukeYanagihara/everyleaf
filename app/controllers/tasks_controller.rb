@@ -1,8 +1,22 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  PER = 9
 
   def index
-    @tasks = Task.all.order(created_at: "DESC")
+    if params[:name].present? && params[:status].present?
+      @tasks = Task.search_name(params[:name]).search_status(params[:status]).page(params[:page]).per(PER)
+    elsif params[:name].present?
+      @tasks = Task.search_name(params[:name]).page(params[:page]).per(PER)
+    elsif params[:status].present?
+      @tasks = Task.search_status(params[:status]).page(params[:page]).per(PER)
+    elsif params[:sort_deadline]
+      @tasks = Task.sort_deadline.page(params[:page]).per(PER)
+    elsif params[:sort_priority]
+      @tasks = Task.sort_priority.page(params[:page]).per(PER)
+    else
+      @tasks = Task.sort_created.page(params[:page]).per(PER)
+    end
+
   end
 
   def show
@@ -20,7 +34,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
+        format.html { redirect_to @task, notice: "作成しました" }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -55,6 +69,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:name, :description)
+      params.require(:task).permit(:name, :description, :deadline, :status, :priority)
     end
 end
