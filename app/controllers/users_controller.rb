@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i{ show edit update }
   skip_before_action :login_required, only: %i{ new create }
   def new
-    @user = User.new
+    if logged_in?
+      redirect_to tasks_path
+    else
+      @user = User.new
+    end
   end
 
   def create
