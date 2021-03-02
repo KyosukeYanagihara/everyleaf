@@ -17,6 +17,7 @@ gem 'bootstrap4-kaminari-views'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'rails-i18n', '~> 5.1' 
+gem 'bcrypt', '3.1.11'
 
 group :development, :test do
   gem 'spring'
