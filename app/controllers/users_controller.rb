@@ -20,9 +20,19 @@ class UsersController < ApplicationController
   end
 
   def show
+    if current_user.id == @user.id
+      render :show
+    else
+      redirect_to tasks_path, notice: "権限がありません。"
+    end
   end
 
   def edit
+    if current_user.id == @user_id
+      render :edit
+    else
+      redirect_to tasks_path
+    end
   end
 
   def update
