@@ -5,4 +5,5 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, presence: true,  length: { in: 8..16 }
   before_validation { email.downcase! }
+  has_many :tasks
 end
