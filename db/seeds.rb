@@ -13,3 +13,16 @@ User.create!(
    created_at: Time.current,
    updated_at: Time.current
 )
+
+5.times do |n|
+   Task.create!(
+      name: "test#{n + 1}",
+      description: "test#{n + 1}",
+      deadline: Time.current.since(n.day),
+      status: "未着手",
+      priority: "低",
+      created_at: Time.current,
+      updated_at: Time.current,
+      user_id: 1
+   )
+ end
