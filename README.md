@@ -1,11 +1,12 @@
 # README
 ## __table__
 #### Userテーブル
-| Column          | Type   | 
-| :-------------  | :----  | 
-| name            | string | 
-| email           | string | 
-| password_digest | string | 
+| Column          | Type    | 
+| :-------------  | :----   | 
+| name            | string  | 
+| email           | string  | 
+| password_digest | string  | 
+| admin           | boolean | 
 #### Taskテーブル
 | Column      | Type     | 
 | :---------  | :------  | 
