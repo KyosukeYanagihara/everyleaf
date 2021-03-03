@@ -10,3 +10,9 @@ ja:
         status: ステータス
         priority: 優先度
         created_at: 登録日
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        admin: 管理者権限
