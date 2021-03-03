@@ -17,5 +17,13 @@
   <div><%= f.password_field :password %></div>
   <div><%= f.label :password_confirmation %></div>
   <div><%= f.password_field :password_confirmation %></div>
+  <div>
+    <%= f.radio_button :admin, true %>
+    <%= f.label :admin, '管理者権限あり', value: true %>
+  </div>
+  <div>
+    <%= f.radio_button :admin, false %>
+    <%= f.label :admin, '管理者権限なし', value: false %>
+  </div>
   <div><%= f.submit "登録する" %></div>
 <% end %>

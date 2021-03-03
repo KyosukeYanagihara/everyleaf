@@ -26,7 +26,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @user.update
+    if @user.update(user_params)
       redirect_to admin_users_path
     else
       render :edit
@@ -43,7 +43,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
   def admin_user
     redirect_to tasks_path, notice: "管理者以外はアクセスできません" unless current_user.admin?
