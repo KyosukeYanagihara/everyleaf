@@ -23,6 +23,21 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
+header {
+    height: 70px;
+    background-color: rgba(3, 3, 3, 0.534);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid rgb(207, 207, 207);
+    width: 100%;
+}
+
+.white a {
+    color: aliceblue;
+}
+
 #container {
     text-align: center;
     margin: 0 auto;
