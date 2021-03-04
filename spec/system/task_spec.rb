@@ -1,17 +1,33 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
-  before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
-    FactoryBot.create(:third_task)
-  end
+  # before do
+  #   user1 = FactoryBot.create(:general_user)
+  #   visit new_session_path
+  #   click_on "ログイン", match: :first
+  #   fill_in "session[email]", with: "general@email.com"
+  #   fill_in "session[password]", with: "general_password"
+  #   click_button "ログイン"
+  #   visit tasks_path
+  #   FactoryBot.create(:task, user: user1)
+  #   FactoryBot.create(:second_task, user: user1)
+  #   FactoryBot.create(:third_task, user: user1)
+  # end
   describe '検索機能' do
     before do
+      user1 = FactoryBot.create(:general_user)
+      visit new_session_path
+      click_on "ログイン", match: :first
+      fill_in "session[email]", with: "general@email.com"
+      fill_in "session[password]", with: "general_password"
+      click_button "ログイン"
       visit tasks_path
+      FactoryBot.create(:task, user: user1)
+      FactoryBot.create(:second_task, user: user1)
+      FactoryBot.create(:third_task, user: user1)
     end
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
-        fill_in "タスク名", with: "name1"
+        fill_in "タスク名で検索", with: "name1"
         click_on "検索"
         expect(page).to have_content 'test_name1'
         expect(page).to_not have_content 'test_name2'
@@ -39,6 +55,18 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
   end
   describe '新規作成機能' do
+    before do
+      user1 = FactoryBot.create(:general_user)
+      visit new_session_path
+      click_on "ログイン", match: :first
+      fill_in "session[email]", with: "general@email.com"
+      fill_in "session[password]", with: "general_password"
+      click_button "ログイン"
+      visit tasks_path
+      FactoryBot.create(:task, user: user1)
+      FactoryBot.create(:second_task, user: user1)
+      FactoryBot.create(:third_task, user: user1)
+    end
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
         visit new_task_path
@@ -57,6 +85,18 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
   end
   describe '一覧表示機能' do
+    before do
+      user1 = FactoryBot.create(:general_user)
+      visit new_session_path
+      click_on "ログイン", match: :first
+      fill_in "session[email]", with: "general@email.com"
+      fill_in "session[password]", with: "general_password"
+      click_button "ログイン"
+      visit tasks_path
+      FactoryBot.create(:task, user: user1)
+      FactoryBot.create(:second_task, user: user1)
+      FactoryBot.create(:third_task, user: user1)
+    end
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         visit tasks_path
@@ -98,6 +138,16 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
+        user1 = FactoryBot.create(:general_user)
+        visit new_session_path
+        click_on "ログイン", match: :first
+        fill_in "session[email]", with: "general@email.com"
+        fill_in "session[password]", with: "general_password"
+        click_button "ログイン"
+        visit tasks_path
+        # FactoryBot.create(:task, user: user1)
+        # FactoryBot.create(:second_task, user: user1)
+        # FactoryBot.create(:third_task, user: user1)
         task = FactoryBot.create(:task)
         visit task_path(task.id)
         expect(page).to have_content 'test_name1'

@@ -17,6 +17,7 @@ gem 'bootstrap4-kaminari-views'
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'rails-i18n', '~> 5.1' 
+gem 'bcrypt', '3.1.11'
 
 group :development, :test do
   gem 'spring'
@@ -25,6 +26,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'faker'
   gem 'launchy'
+  gem 'database_cleaner'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
