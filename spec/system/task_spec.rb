@@ -136,20 +136,18 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
   end
   describe '詳細表示機能' do
-    before do
-      user1 = FactoryBot.create(:general_user)
-      visit new_session_path
-      click_on "ログイン", match: :first
-      fill_in "session[email]", with: "general@email.com"
-      fill_in "session[password]", with: "general_password"
-      click_button "ログイン"
-      visit tasks_path
-      FactoryBot.create(:task, user: user1)
-      FactoryBot.create(:second_task, user: user1)
-      FactoryBot.create(:third_task, user: user1)
-    end
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
+        user1 = FactoryBot.create(:general_user)
+        visit new_session_path
+        click_on "ログイン", match: :first
+        fill_in "session[email]", with: "general@email.com"
+        fill_in "session[password]", with: "general_password"
+        click_button "ログイン"
+        visit tasks_path
+        # FactoryBot.create(:task, user: user1)
+        # FactoryBot.create(:second_task, user: user1)
+        # FactoryBot.create(:third_task, user: user1)
         task = FactoryBot.create(:task)
         visit task_path(task.id)
         expect(page).to have_content 'test_name1'
