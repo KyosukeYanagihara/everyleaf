@@ -26,6 +26,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'faker'
   gem 'launchy'
+  gem 'database_cleaner'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
