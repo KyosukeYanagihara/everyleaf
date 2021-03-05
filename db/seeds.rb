@@ -5,14 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(
-   name: 'テスト太郎',
-   email: 'test@test.com',
-   password: '123456789',
-   password_confirmation: '123456789',
-   created_at: Time.current,
-   updated_at: Time.current
-)
+10.times do |n|
+   User.create!(
+      name: "test_name#{n}",
+      email: "test#{n}@test.com",
+      password: '123456789',
+      password_confirmation: '123456789',
+      created_at: Time.current,
+      updated_at: Time.current
+   )
+end
 User.create!(
    name: '管理者',
    email: 'admin@admin.com',
@@ -21,30 +23,20 @@ User.create!(
    admin: true,
    created_at: Time.current,
    updated_at: Time.current,
-)
-
-5.times do |n|
-   Task.create!(
-      name: "test#{n + 1}",
-      description: "test#{n + 1}",
-      deadline: Time.current.since(n.day),
-      status: "未着手",
-      priority: "低",
-      created_at: Time.current,
-      updated_at: Time.current,
-      user_id: 1
    )
- end
-
-5.times do |n|
-   Task.create!(
-      name: "test#{n + 1}",
-      description: "test#{n + 1}",
-      deadline: Time.current.since(n.day),
-      status: "未着手",
-      priority: "低",
-      created_at: Time.current,
-      updated_at: Time.current,
-      user_id: 2
-   )
- end
+11.times do |n|
+   User.all.each do |user|
+      user.tasks.create!(
+         name: "test#{n + 1}",
+         description: "test#{n + 1}",
+         deadline: Time.current.since(n.day),
+         status: "未着手",
+         priority: "低",
+         created_at: Time.current,
+         updated_at: Time.current,
+      )
+   end
+end
+10.times do |n|
+   Label.create!( name: "test#{n}")
+end
