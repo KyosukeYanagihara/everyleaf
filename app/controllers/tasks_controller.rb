@@ -3,8 +3,11 @@ class TasksController < ApplicationController
   PER = 9
 
   def index
+    @tasks = Task.all
     if params[:name].present? && params[:status].present?
       @tasks = current_user.tasks.search_name(params[:name]).search_status(params[:status]).page(params[:page]).per(PER)
+    elsif params[:label_id].present?
+      @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }).page(params[:page]).per(PER)
     elsif params[:name].present?
       @tasks = current_user.tasks.search_name(params[:name]).page(params[:page]).per(PER)
     elsif params[:status].present?
@@ -68,6 +71,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:name, :description, :deadline, :status, :priority)
+      params.require(:task).permit(:name, :description, :deadline, :status, :priority, label_ids: [] )
     end
 end

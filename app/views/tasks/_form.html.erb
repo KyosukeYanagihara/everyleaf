@@ -36,6 +36,9 @@
     <%= f.select :priority, [["低", "低"], ["中", "中"], ["高", "高"]], include_blank: "選択して下さい" %>
   </div>
 
+  <div class="field">
+    <%= f.collection_check_boxes(:label_ids, Label.all, :id, :name ) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
