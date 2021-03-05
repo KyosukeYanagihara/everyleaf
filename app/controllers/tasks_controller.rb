@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   PER = 9
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
     if params[:name].present? && params[:status].present?
       @tasks = current_user.tasks.search_name(params[:name]).search_status(params[:status]).page(params[:page]).per(PER)
     elsif params[:label_id].present?
